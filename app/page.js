@@ -1,9 +1,15 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -42,6 +48,7 @@ export default function Home() {
               {msg.text}
             </div>
           ))}
+          <div ref={messagesEndRef} />
         </div>
         <div className="flex gap-2">
           <input

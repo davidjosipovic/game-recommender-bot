@@ -8,6 +8,17 @@ export async function POST(request) {
     const { message } = await request.json();
     const { intent, platform, genre, similarGame } = await fetchWitAiData(message);
 
+    if (intent === "greet") {
+      const greetings = [
+        "Hello! How can I assist you today?",
+        "Hi there! What can I do for you?",
+        "Hey! How can I help you?",
+        "Greetings! How may I assist you?"
+      ];
+      const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+      return NextResponse.json({ reply: randomGreeting });
+    }
+
     if (intent !== "GameRecommendation") {
       return NextResponse.json({ reply: "I'm not sure what you're asking. Could you clarify?" });
     }
