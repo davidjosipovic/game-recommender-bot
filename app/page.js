@@ -56,6 +56,12 @@ export default function Home() {
             className="flex-1 p-2 border rounded"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSend();
+              }
+            }}
             placeholder="Type your message..."
           />
           <button
