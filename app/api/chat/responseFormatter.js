@@ -5,7 +5,7 @@ export function formatGames(games, searchedGame) {
     return `Sorry, I couldn't find any games similar to "${searchedGame}".`;
   }
 
-  const gameNames = games.map((game) => ` ${game.name}`).join("\n");
+  const gameNames = games.map((game) => game.name).join(", ") + ".";
 
   const responses = [
     `Here are some amazing games similar to "${searchedGame}" that you might enjoy:\n\n${gameNames}`,
