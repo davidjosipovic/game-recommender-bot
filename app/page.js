@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="w-full max-w-md p-4 border rounded shadow">
-        <h1 className="text-2xl font-bold mb-4 flex items-center gap-2"><Image src="/robot_icon.png" alt="Game Bot" width={50} height={50} className="mb-0" />Game Recommender Bot</h1>
+        <h1 className="text-2xl font-bold mb-4 flex items-center gap-2"><Image src="/robot_icon.png" alt="Game Bot" width={40} height={40} className="mb-0 " />Game Recommender Bot</h1>
         
         
         <hr ></hr>
