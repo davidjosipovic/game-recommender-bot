@@ -1,9 +1,11 @@
 'use client';
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+
 
   const messagesEndRef = useRef(null);
 
@@ -37,7 +39,11 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="w-full max-w-md p-4 border rounded shadow">
-        <div className="h-96 overflow-y-auto mb-4">
+        <h1 className="text-2xl font-bold mb-4 flex items-center gap-2"><Image src="/robot_icon.png" alt="Game Bot" width={50} height={50} className="mb-0" />Game Recommender Bot</h1>
+        
+        
+        <hr ></hr>
+        <div className="h-96 overflow-y-auto mb-4 mt-4">
           {messages.map((msg, index) => (
             <div
               key={index}
