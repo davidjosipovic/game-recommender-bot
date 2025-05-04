@@ -74,8 +74,7 @@ export async function fetchGamesFromIGDB({ platform, genre, similarGame }) {
     }
   }
 
-  if (genre && !platform && !similarGame) {
-
+  if (genre && platform.length==0 && !similarGame) {
     const genreIds = await Promise.all(genre.map(fetchGenreId));
     const validGenreIds = genreIds.filter(id => id !== null);
 
@@ -108,7 +107,7 @@ export async function fetchGamesFromIGDB({ platform, genre, similarGame }) {
     }
   }
 
-  if (platform && !genre && !similarGame) {
+  if (platform && genre.length==0 && !similarGame) {
     console.log("Platform:", platform);
     const platformIds = await Promise.all(platform.map(fetchPlatformId));
     console.log("Platform IDs:", platformIds);
@@ -142,7 +141,7 @@ export async function fetchGamesFromIGDB({ platform, genre, similarGame }) {
       }));
     }
   }
-  if (platform && genre && !similarGame) {
+  if (platform.length>0 && genre.length>0 && !similarGame) {
     console.log("Platform:", platform);
     console.log("Genre:", genre);
     const platformIds = await Promise.all(platform.map(fetchPlatformId));
