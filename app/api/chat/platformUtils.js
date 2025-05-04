@@ -3,6 +3,8 @@
 export async function fetchPlatformId(platformName) {
   const platformMapping = {
     "pc": 6,
+    "psp":38,
+    "PlayStation Portable":38,
     "ps1": 7,
     "ps2": 8,
     "ps3": 9,
