@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
 import { fetchWitAiData } from "./witAiUtils";
-import { fetchGamesFromIGDB } from "./igdbUtils";
+import { fetchGamesFromIGDB } from "./gameSearch";
 import { formatGames } from "./responseFormatter";
 
 export async function POST(request) {
   try {
     const { message } = await request.json();
-    const { intent, platform, genre, similarGame } = await fetchWitAiData(message);
-
+    const { intent, platform, genre=[], similarGame } = await fetchWitAiData(message);
     if (intent === "greet") {
       const greetings = [
         "Hello! How can I assist you today?",
@@ -22,7 +21,7 @@ export async function POST(request) {
     if (intent !== "GameRecommendation") {
       return NextResponse.json({ reply: "I'm not sure what you're asking. Could you clarify?" });
     }
-
+    
     const games = await fetchGamesFromIGDB({ platform, genre, similarGame });
     const reply = formatGames(games, similarGame);
 

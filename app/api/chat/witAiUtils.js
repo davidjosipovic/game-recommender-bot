@@ -16,8 +16,12 @@ export async function fetchWitAiData(message) {
 
   const witData = await witResponse.json();
   const intent = witData.intents?.[0]?.name || null;
-  const platform = witData.entities?.['platform:platform']?.[0]?.value || null;
-  const genre = witData.entities?.['genre:genre']?.[0]?.value || null;
+  const platform = Array.from(new Set(
+    (witData.entities?.['platform:platform'] || []).map(g => g.value.toLowerCase())
+  ));  
+  const genre = Array.from(new Set(
+    (witData.entities?.['genre:genre'] || []).map(g => g.value.toLowerCase())
+  ));  
   const similarGame = witData.entities?.['similar_game:similar_game']?.[0]?.value || null;
 
   return { intent, platform, genre, similarGame };
