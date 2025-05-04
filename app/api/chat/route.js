@@ -44,7 +44,7 @@ export async function POST(request) {
       }
 
       if (intent === "GameRecommendation") {
-        if (similarGame) {
+        if (similarGame && !platform.length && !genre.length) {
           conversationState.set(sessionId, { step: 3, data: { similarGame } });
           return NextResponse.json({ reply: "Would you like to specify a genre or platform for filtering?" });
         }
