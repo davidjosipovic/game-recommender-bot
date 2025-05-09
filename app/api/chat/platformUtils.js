@@ -27,7 +27,6 @@ export async function fetchPlatformId(platformName) {
     return platformId;
   }
 
-  // Fallback to IGDB API search if not found in the mapping
   const response = await fetch("https://api.igdb.com/v4/platforms", {
     method: "POST",
     headers: {

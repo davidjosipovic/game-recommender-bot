@@ -9,7 +9,6 @@ export async function POST(request) {
   try {
     const { message, sessionId } = await request.json();
 
-    // Retrieve or initialize conversation state
     const state = conversationState.get(sessionId) || { step: 0, data: {} };
 
     const { intent, platform, genre = [], similarGame } = await fetchWitAiData(message);
@@ -50,12 +49,10 @@ export async function POST(request) {
         }
 
         if (!platform.length && !genre.length && !similarGame) {
-          // Not enough information, ask follow-up question
           conversationState.set(sessionId, { step: 1, data: {} });
           return NextResponse.json({ reply: "What platform or genre are you interested in?" });
         }
 
-        // Proceed with game recommendation
         const games = await fetchGamesFromIGDB({ platform, genre, similarGame });
         const reply = formatGames(games, similarGame);
         return NextResponse.json({ reply });
@@ -65,7 +62,6 @@ export async function POST(request) {
     }
 
     if (state.step === 1) {
-      // Process follow-up response
       if (intent === "exit") {
         conversationState.delete(sessionId);
         return NextResponse.json({ reply: "Alright, I've reset our conversation. Let me know if you need anything else!" });
@@ -78,7 +74,6 @@ export async function POST(request) {
         return NextResponse.json({ reply: "I still need to know the platform or genre you're interested in." });
       }
 
-      // Proceed with game recommendation
       const games = await fetchGamesFromIGDB({
         platform: state.data.platform || platform,
         genre: state.data.genre || genre,
@@ -86,7 +81,6 @@ export async function POST(request) {
       });
       const reply = formatGames(games, similarGame);
 
-      // Clear conversation state
       conversationState.delete(sessionId);
       return NextResponse.json({ reply });
     }

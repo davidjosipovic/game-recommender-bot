@@ -43,7 +43,6 @@ export async function fetchGenreId(genreName) {
     return genreId;
   }
 
-  // Fallback to IGDB API search if not found in the mapping
   const response = await fetch("https://api.igdb.com/v4/genres", {
     method: "POST",
     headers: {

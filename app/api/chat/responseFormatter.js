@@ -23,7 +23,6 @@ export function formatGames(games, searchedGame, genre, platform) {
       `Games similar to "${searchedGame}" that you should try:\n\n${gameNames}`
     ];
 
-    // Randomly select a response template
     const randomIndex = Math.floor(Math.random() * responses.length);
     return responses[randomIndex];
   } else if (genre) {
